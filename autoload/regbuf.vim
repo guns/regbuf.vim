@@ -49,6 +49,7 @@ function! regbuf#open() "{{{
     autocmd regbuf WinLeave    <buffer> call s:close_preview_window()
 
     nnoremap <silent><buffer> <Plug>(regbuf-yank)  :<C-u>call <SID>do_operate('buf_yank')<CR>
+    nnoremap <silent><buffer> <Plug>(regbuf-yank-close)     :<C-u>call <SID>do_operate('buf_yank_close')<CR>
     nnoremap <silent><buffer> <Plug>(regbuf-paste) :<C-u>call <SID>do_operate('buf_paste')<CR>
     nnoremap <silent><buffer> <Plug>(regbuf-swap)  :<C-u>call <SID>do_operate('buf_swap')<CR>
     nnoremap <silent><buffer> <Plug>(regbuf-paste-buffer)   :<C-u>call <SID>do_operate('buf_paste_buffer')<CR>
@@ -63,7 +64,7 @@ function! regbuf#open() "{{{
         nmap <buffer> bp <Plug>(regbuf-paste-buffer-nodelete)
         nmap <buffer> e <Plug>(regbuf-edit)
 
-        nmap <buffer> <CR>      <Plug>(regbuf-edit)
+        nmap <buffer> <CR>      <Plug>(regbuf-yank-close)
         nmap <buffer> q         <Plug>(regbuf-close)
         nmap <buffer> <Esc>     <Plug>(regbuf-close)
     endif
@@ -133,6 +134,10 @@ function! s:buf_yank(...) "{{{
 
     redraw
     echo 'Yanked' regname 'register to' given_regname 'register.'
+endfunction "}}}
+
+function! s:buf_yank_close(...) "{{{
+    call s:buf_yank() | quit
 endfunction "}}}
 
 function! s:buf_paste(...) "{{{
