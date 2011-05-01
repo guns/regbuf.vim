@@ -60,7 +60,7 @@ function! regbuf#open() "{{{
         nmap <buffer> y <Plug>(regbuf-yank)
         nmap <buffer> p <Plug>(regbuf-paste)
         nmap <buffer> s <Plug>(regbuf-swap)
-        nmap <buffer> bp <Plug>(regbuf-paste-buffer)
+        nmap <buffer> bp <Plug>(regbuf-paste-buffer-nodelete)
         nmap <buffer> e <Plug>(regbuf-edit)
 
         nmap <buffer> <CR>      <Plug>(regbuf-edit)
